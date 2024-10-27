@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击频率计算器</title>
+    <style>
+        #clickButton {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton">开始</button>
+    <button id="clickButton">点击</button>
+    <p>点击频率: <span id="frequency">0</span> 次/秒</p>
+
+    <script>
+        let startButton = document.getElementById('startButton');
+        let clickButton = document.getElementById('clickButton');
+        let frequencyDisplay = document.getElementById('frequency');
+        let clickCount = 0;
+        let startTime;
+
+        startButton.addEventListener('click', function() {
+            clickButton.style.display = 'inline';
+            startButton.style.display = 'none';
+            startTime = new Date().getTime();
+            clickCount = 0;
+            frequencyDisplay.textContent = '0';
+        });
+
+        clickButton.addEventListener('click', function() {
+            clickCount++;
+            let currentTime = new Date().getTime();
+            let elapsedTime = (currentTime - startTime) / 1000; // 转换为秒
+            let frequency = (clickCount / elapsedTime).toFixed(2);
+            frequencyDisplay.textContent = frequency;
+        });
+    </script>
+</body>
+</html>
